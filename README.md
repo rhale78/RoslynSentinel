@@ -207,9 +207,9 @@ When an AI agent edits code manually it is doing **text manipulation**, not sema
 
 ---
 
-## 🚀 266 MCP Tools Across 44 Engines + 7 Tool Classes
+## 🚀 293 MCP Tools Across 44 Engines + 7 Tool Classes
 
-Roslyn Sentinel exposes **265 named MCP tools** through 7 façade classes that wrap 44 specialized analysis and transformation engines. All tools are always live; individual **feature toggles** let you silence noisy analysis rules without touching code.
+Roslyn Sentinel exposes **293 named MCP tools** through 7 façade classes that wrap 44 specialized analysis and transformation engines. All tools are always live; individual **feature toggles** let you silence noisy analysis rules without touching code.
 
 > **Rating Key:** ⭐⭐⭐⭐⭐ Production-ready &nbsp;·&nbsp; ⭐⭐⭐⭐ Stable, minor edge cases &nbsp;·&nbsp; ⭐⭐⭐ Functional, documented limitations &nbsp;·&nbsp; ⭐⭐ Partial implementation
 
