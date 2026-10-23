@@ -1,6 +1,31 @@
 # Roslyn Sentinel
 
-**Roslyn Sentinel** is a high-performance, persistent [Model Context Protocol (MCP)](https://spec.modelcontextprotocol.io/) server that gives AI agents **compiler-grade intelligence** over .NET solutions. Rather than asking an AI to guess what a refactored file should look like, Roslyn Sentinel uses the **official Roslyn compiler APIs** to perform every rename, move, extraction, and modernization with the same semantic accuracy as Visual Studio itself — and then validates the result with a real compilation pass before touching a single file on disk.
+**Roslyn Sentinel** is a Roslyn-backed [Model Context Protocol (MCP)](https://spec.modelcontextprotocol.io/) server that gives AI coding agents **IDE-grade, compiler-verified C# analysis and refactoring tools**. Rather than asking an AI to guess what a refactored file should look like, Roslyn Sentinel uses the **official Roslyn compiler APIs** to perform every rename, move, extraction, and modernization with the same semantic accuracy as Visual Studio itself — and then validates the result with a real compilation pass before touching a single file on disk.
+
+## Overview
+
+**Why it exists.** A single AI "move class" edit once took a clean solution to roughly 30,000 compile errors. The agent was doing text manipulation — guessing at namespaces, `using` directives, and call sites — instead of semantic manipulation. Agents need edits that come from the compiler's symbol model and can be verified before they land, not text guesses that are found to be broken afterwards.
+
+**Key facts** (measured from this repository on 2026-10-22):
+
+| | |
+|---|---|
+| MCP tools | 293 `[McpServerTool]` methods across 7 tool classes |
+| Tests | 2,035 NUnit test attributes (1,963 `[Test]` + 72 `[TestCase]`); `dotnet test` reports 2,021 tests — 1,934 passed, 87 skipped, 0 failed |
+| Runtime | .NET 10 (`net10.0`; SDK pinned in `global.json`) |
+| Transport | stdio |
+
+**Build and connect:**
+
+```bash
+git clone https://github.com/rhale78/RoslynSentinel
+cd RoslynSentinel
+dotnet publish RoslynSentinel.Server/RoslynSentinel.Server.csproj -c Release -o ./publish
+```
+
+Register `./publish/RoslynSentinel.Server.exe` (Windows) or `dotnet ./publish/RoslynSentinel.Server.dll` (macOS/Linux) as a stdio MCP server in your AI assistant, reload it, and ask it to load your solution (`Load my solution: /path/to/MySolution.sln`). Per-client config snippets are under [Installation](#-installation) below.
+
+**License:** MIT — see [LICENSE](./LICENSE).
 
 ---
 
@@ -159,8 +184,8 @@ Without the env var, real-solution tests are automatically skipped (`Assert.Igno
 |----------|---------|
 | **[README.md](./README.md)** | High-level overview (this file) |
 | **[TOOL_DOCUMENTATION.md](./TOOL_DOCUMENTATION.md)** | Before/after code examples for every tool |
-| [UNFINISHED.md](./UNFINISHED.md) | Full development history and session notes |
-| [UNFINISHED_FEATURES.md](./UNFINISHED_FEATURES.md) | Backlog, deferred features, known limitations |
+| [docs/UNFINISHED.md](./docs/UNFINISHED.md) | Full development history and session notes |
+| [docs/UNFINISHED_FEATURES.md](./docs/UNFINISHED_FEATURES.md) | Backlog, deferred features, known limitations |
 | [DOCUMENTATION_INDEX.md](./DOCUMENTATION_INDEX.md) | Navigation guide for all docs |
 
 ---
@@ -676,7 +701,7 @@ dotnet test RoslynSentinel.Tests/RoslynSentinel.Tests.csproj
 
 ## 📜 Roadmap & Backlog
 
-See [UNFINISHED_FEATURES.md](./UNFINISHED_FEATURES.md) for the backlog of planned additions:
+See [docs/UNFINISHED_FEATURES.md](./docs/UNFINISHED_FEATURES.md) for the backlog of planned additions:
 - `ConvertInterfaceToAbstractClass`, `AutoParallelize`
 - IDE0042/IDE0050/IDE0250/IDE0340 modernization passes
 - EPC16/EPC18/EPC32 async audit rules

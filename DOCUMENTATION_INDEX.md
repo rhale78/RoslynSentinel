@@ -10,8 +10,8 @@
 |------|---------|
 | **[README.md](./README.md)** | High-level overview, installation guide, tool categories |
 | **[TOOL_DOCUMENTATION.md](./TOOL_DOCUMENTATION.md)** | Before/after code examples for every tool |
-| **[UNFINISHED.md](./UNFINISHED.md)** | Backlog: planned features and known limitations |
-| **[UNFINISHED_FEATURES.md](./UNFINISHED_FEATURES.md)** | Deferred bugs with regression tests and edge-case limitations |
+| **[docs/UNFINISHED.md](./docs/UNFINISHED.md)** | Backlog: planned features and known limitations |
+| **[docs/UNFINISHED_FEATURES.md](./docs/UNFINISHED_FEATURES.md)** | Deferred bugs with regression tests and edge-case limitations |
 
 ---
 
